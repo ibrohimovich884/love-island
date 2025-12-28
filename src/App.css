@@ -1,0 +1,12 @@
+    .content-area {
+    /* Header 70px bo'lgani uchun paddingni 80px qilamiz */
+    padding-top: 80px; 
+    
+    /* BottomNav 75px bo'lgani uchun paddingni 90px qilamiz */
+    padding-bottom: 90px; 
+    
+    padding-left: 15px;
+    padding-right: 15px;
+    min-height: 100vh;
+    box-sizing: border-box; /* Padding kenglikka ta'sir qilmasligi uchun */
+}

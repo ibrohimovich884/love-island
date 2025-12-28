@@ -1,0 +1,92 @@
+/* src/pages/Home.css */
+.home-content-wrapper {
+    padding: 20px;
+    padding-bottom: 90px; /* BottomNav uchun joy */
+    padding-top: 80px;    /* Header uchun joy */
+}
+
+.partner-card {
+    background: linear-gradient(135deg, #ff4d6d 0%, #ff758c 100%);
+    border-radius: 28px;
+    padding: 25px;
+    color: white;
+    box-shadow: 0 12px 24px rgba(255, 77, 109, 0.25);
+    margin-bottom: 30px;
+}
+
+.heart-circle {
+    background: rgba(255, 255, 255, 0.2);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.partner-info h4 {
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+.partner-info p {
+    font-size: 14px;
+    opacity: 0.9;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+.search-partner-btn {
+    width: 100%;
+    background: white;
+    color: #ff4d6d;
+    border: none;
+    padding: 15px;
+    border-radius: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: 0.3s;
+}
+
+.search-partner-btn:active {
+    transform: scale(0.98);
+}
+
+.section-title h4 {
+    margin-bottom: 15px;
+    color: #1a1a1a;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.game-item {
+    background: white;
+    padding: 20px 10px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+}
+
+.game-icon {
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.game-item span {
+    font-size: 11px;
+    font-weight: 600;
+    color: #555;
+}
