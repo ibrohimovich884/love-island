@@ -1,0 +1,125 @@
+/* src/pages/Register.css */
+.register-wrapper {
+    min-height: 100vh;
+    background: #ffffff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #1a1a1a;
+    background: #f7f8fa;
+    padding: 8px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.register-card {
+    margin-top: 60px;
+    width: 100%;
+}
+
+.register-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.icon-box {
+    background: #fff0f3;
+    width: 60px;
+    height: 60px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+}
+
+.register-header h1 {
+    font-size: 26px;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+.register-header p {
+    color: #888;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.input-field {
+    display: flex;
+    align-items: center;
+    background: #f7f8fa;
+    border: 1.5px solid #f1f3f5;
+    border-radius: 16px;
+    padding: 14px 18px;
+    transition: 0.3s;
+}
+
+.input-field:focus-within {
+    border-color: #ff4d6d;
+    background: #fff;
+}
+
+.input-field svg {
+    color: #adb5bd;
+    margin-right: 12px;
+}
+
+.input-field input {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+}
+
+.register-btn {
+    background: #ff4d6d;
+    color: white;
+    border: none;
+    border-radius: 16px;
+    padding: 18px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+    box-shadow: 0 8px 20px rgba(255, 77, 109, 0.2);
+}
+
+.register-footer {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 14px;
+    color: #666;
+}
+
+.register-footer a {
+    color: #ff4d6d;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.error-msg {
+    background: #fff5f5;
+    color: #ff4d6d;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 13px;
+    text-align: center;
+}

@@ -1,0 +1,147 @@
+/* Mobil qurilmalar uchun asosiy konteyner */
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #ffffff; /* Telefonlarda toza oq rang yaxshi ko'rinadi */
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 100%; /* Mobil ekranda to'liq kenglik */
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.heart-icon {
+    margin-bottom: 15px;
+    filter: drop-shadow(0 4px 10px rgba(255, 77, 109, 0.3));
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.auth-header h1 {
+    font-size: 28px;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+.auth-header p {
+    color: #909090;
+    font-size: 15px;
+    margin-top: 8px;
+}
+
+/* Form elementlari */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    background: #f7f8fa;
+    border: 1.5px solid #f1f3f5;
+    border-radius: 16px;
+    padding: 14px 18px;
+    transition: 0.3s;
+}
+
+.input-group:focus-within {
+    border-color: #ff4d6d;
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(255, 77, 109, 0.1);
+}
+
+.input-group svg {
+    color: #adb5bd;
+    margin-right: 12px;
+}
+
+.input-group input {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+    color: #1a1a1a;
+}
+
+.input-group input::placeholder {
+    color: #adb5bd;
+}
+
+/* Tugma dizayni */
+.auth-btn {
+    background: #ff4d6d;
+    color: white;
+    border: none;
+    border-radius: 16px;
+    padding: 18px;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+    box-shadow: 0 8px 20px rgba(255, 77, 109, 0.25);
+}
+
+.auth-btn:active {
+    transform: scale(0.97);
+    background: #e63958;
+}
+
+/* Xatolik xabari */
+.error-msg {
+    background: #fff5f5;
+    color: #ff4d6d;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    text-align: center;
+    border: 1px solid #ffe3e3;
+}
+
+/* Footer */
+.auth-footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 15px;
+    color: #6c757d;
+}
+
+.auth-footer a {
+    color: #ff4d6d;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+/* Responsivlik (Kompyuter uchun hozircha minimal cheklov) */
+@media (min-width: 480px) {
+    .auth-wrapper {
+        background: #f8f9fa;
+    }
+    .auth-card {
+        background: white;
+        padding: 40px;
+        border-radius: 30px;
+        max-width: 400px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+    }
+}
