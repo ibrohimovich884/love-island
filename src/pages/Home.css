@@ -1,92 +1,129 @@
 /* src/pages/Home.css */
 .home-content-wrapper {
-    padding: 20px;
-    padding-bottom: 90px; /* BottomNav uchun joy */
-    padding-top: 80px;    /* Header uchun joy */
+    /* Yonlardagi paddingni 20px dan 15px ga kamaytiramiz */
+    padding: 15px;
+    padding-bottom: 90px;
+    padding-top: 70px; /* Header balandligiga qarab moslang */
+    background: #fdfdfd;
 }
 
+/* Asosiy Banner Card */
 .partner-card {
     background: linear-gradient(135deg, #ff4d6d 0%, #ff758c 100%);
-    border-radius: 28px;
-    padding: 25px;
+    border-radius: 24px; /* Mobilda juda katta radius shart emas */
+    padding: 20px; /* Ichki paddingni ham ixchamlashtirdik */
     color: white;
-    box-shadow: 0 12px 24px rgba(255, 77, 109, 0.25);
-    margin-bottom: 30px;
+    box-shadow: 0 8px 20px rgba(255, 77, 109, 0.2);
+    margin-bottom: 25px;
+    /* Kartochka chetga taqalib qolmasligi uchun optimal */
 }
 
 .heart-circle {
-    background: rgba(255, 255, 255, 0.2);
-    width: 60px;
-    height: 60px;
+    background: rgba(255, 255, 255, 0.25);
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
 .partner-info h4 {
-    font-size: 20px;
-    margin: 10px 0;
+    font-size: 18px; /* Mobilda sarlavha biroz kichikroq */
+    font-weight: 800;
+    margin: 5px 0;
 }
 
 .partner-info p {
-    font-size: 14px;
-    opacity: 0.9;
-    margin-bottom: 20px;
-    line-height: 1.4;
+    font-size: 13px;
+    opacity: 0.95;
+    margin-bottom: 18px;
+    line-height: 1.3;
 }
 
-.search-partner-btn {
-    width: 100%;
-    background: white;
-    color: #ff4d6d;
-    border: none;
-    padding: 15px;
-    border-radius: 16px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    transition: 0.3s;
-}
-
-.search-partner-btn:active {
-    transform: scale(0.98);
-}
-
-.section-title h4 {
-    margin-bottom: 15px;
-    color: #1a1a1a;
-    font-size: 18px;
-    font-weight: 700;
-}
-
+/* O'yinlar Grid - 3 ta ustun mobilda juda kichik! */
 .games-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    /* Mobilda 3 ta ustun o'rniga 2 ta qilish tavsiya etiladi (yoki 3 ta kichikroq bo'lsa) */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 10px; /* Masofani kamaytirdik */
 }
 
 .game-item {
     background: white;
-    padding: 20px 10px;
-    border-radius: 20px;
+    padding: 15px 5px; /* Ichki bo'shliqni kamaytirdik */
+    border-radius: 18px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    justify-content: center;
+    border: 1px solid #f1f3f5; /* Yengil chegara */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    transition: 0.2s;
+}
+
+.game-item:active {
+    transform: scale(0.95);
+    background: #fff0f3;
 }
 
 .game-icon {
-    font-size: 28px;
+    font-size: 24px;
     margin-bottom: 5px;
+    background: #fff0f3;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
 }
 
 .game-item span {
-    font-size: 11px;
-    font-weight: 600;
-    color: #555;
+    font-size: 10px; /* Matn sig'ishi uchun */
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+}
+
+/* Section title paddingini to'g'irlash */
+.section-title h4 {
+    margin: 0 0 12px 5px;
+    color: #1a1a1a;
+    font-size: 17px;
+    font-weight: 800;
+}
+.search-partner-btn {
+    width: 100%;
+    /* Balandlikni kamaytirdik: padding 16px dan 12px ga */
+    padding: 12px 15px; 
+    background: white;
+    color: #ff4d6d;
+    border: none;
+    border-radius: 14px; /* Ixchamroq radius */
+    
+    /* Matnni bir qatorga majburlash */
+    font-size: 14px; 
+    font-weight: 700;
+    white-space: nowrap; /* Matn pastga tushib ketmaydi */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Ikonka va matn orasidagi masofa */
+    
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
+}
+
+/* Bosganda effekt */
+.search-partner-btn:active {
+    transform: scale(0.97);
+    background: #fff0f3; /* Bosganda biroz pushtirang bo'ladi */
+}
+
+/* Ikonka o'lchamini matnga moslash */
+.search-partner-btn svg {
+    width: 18px;
+    height: 18px;
 }

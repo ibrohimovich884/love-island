@@ -1,31 +1,67 @@
-        /* src/pages/Notifications.css */
-.notif-container {
-    padding: 10px;
-    animation: fadeIn 0.4s ease;
+/* src/pages/Notifications.css */
+
+/* Umumiy sahifa foni - biroz pushtiroq gradient */
+.notif-page {
+    background: linear-gradient(180deg, #fff5f7 0%, #ffffff 100%);
+    min-height: 100vh;
+    padding-bottom: 30px;
 }
 
-.notif-title {
-    margin-bottom: 20px;
-    font-size: 20px;
-    color: #1a1a1a;
-}
-
-.notif-card {
+/* Header - Instagram/Tinder stili */
+.notif-header {
     display: flex;
     align-items: center;
-    background: white;
-    padding: 15px;
-    border-radius: 20px;
-    margin-bottom: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    gap: 12px;
+    justify-content: space-between;
+    padding: 18px 20px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(15px); /* Shisha effekti */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(255, 77, 109, 0.1);
 }
 
-.notif-card img {
-    width: 50px;
-    height: 50px;
-    border-radius: 15px;
+.notif-header h2 {
+    font-size: 19px;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+.notif-header button {
+    background: none;
+    border: none;
+    color: #ff4d6d;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* Bildirishnoma kartochkasi */
+.notif-item {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    background: white;
+    margin: 12px 16px;
+    border-radius: 22px; /* Yumshoq burchaklar */
+    gap: 14px;
+    box-shadow: 0 10px 20px rgba(255, 77, 109, 0.05); /* Juda yumshoq soya */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: transform 0.2s ease;
+}
+
+.notif-item:active {
+    transform: scale(0.98); /* Bosganda reaksiya */
+}
+
+.notif-item img {
+    width: 60px; /* Kattaroq avatar mobilda yaxshi ko'rinadi */
+    height: 60px;
+    border-radius: 50%;
     object-fit: cover;
+    border: 3px solid #fff0f3;
 }
 
 .notif-info {
@@ -33,41 +69,63 @@
 }
 
 .notif-info strong {
-    font-size: 15px;
-    color: #333;
+    display: block;
+    font-size: 16px;
+    color: #2d3436;
+    margin-bottom: 2px;
 }
 
-.notif-info p {
-    font-size: 12px;
+.notif-info span {
+    font-size: 13px;
     color: #888;
-    margin: 2px 0 0;
+    line-height: 1.4;
 }
 
-.notif-actions {
+/* Tugmalar bloki */
+.notif-btns {
     display: flex;
     gap: 8px;
 }
 
-.accept-btn, .reject-btn {
+/* Qabul qilish - Love Island pushtisi */
+.btn-accept {
+    background: linear-gradient(135deg, #ff4d6d 0%, #ff8fa3 100%);
+    color: white !important;
     border: none;
-    padding: 8px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.2s;
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(255, 77, 109, 0.3);
 }
 
-.accept-btn { background: #e7f5ff; color: #228be6; }
-.reject-btn { background: #fff0f3; color: #ff4d6d; }
+/* Rad etish - kulrang/minimal */
+.btn-reject {
+    background: #f1f3f5;
+    color: #adb5bd !important;
+    border: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-.accept-btn:active { background: #228be6; color: white; }
-.reject-btn:active { background: #ff4d6d; color: white; }
-
-.empty-notif {
-    text-align: center;
+/* Bo'sh holat */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     margin-top: 100px;
+    color: #adb5bd;
 }
 
-.empty-notif p {
-    color: #adb5bd;
-    margin-top: 10px;
+.empty-state p {
+    margin-top: 15px;
+    font-size: 15px;
+    font-weight: 500;
 }

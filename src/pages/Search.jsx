@@ -26,6 +26,15 @@ const Search = () => {
         }
     };
 
+    const handleSendRequest = async (friendId) => {
+        try {
+            await api.post('/users/request', { friendId });
+            alert("So'rov muvaffaqiyatli yuborildi!");
+        } catch (err) {
+            alert(err.response?.data?.error || "Xatolik yuz berdi");
+        }
+    };
+
     const sendRequest = async (receiverId) => {
         try {
             await api.post('/users/request', { friendId: receiverId });
@@ -58,14 +67,14 @@ const Search = () => {
                     results.map((u) => (
                         <div key={u.id} className="user-card">
                             <div className="user-card-info">
-                                <img src={u.avatar_url} alt="avatar" />
+                                <img src={u.avatar_url || '/avatar.png'} alt="avatar" />
                                 <div>
                                     <h4>{u.username}</h4>
-                                    <p>{u.bio || "Salom, men o'yindaman!"}</p>
+                                    <p>{u.bio || "Online"}</p>
                                 </div>
                             </div>
-                            <button onClick={() => sendRequest(foundUser.id)} className="send-req-btn">
-                                Yurakcha yuborish
+                            <button onClick={() => handleSendRequest(user.id)} className="request-btn">
+                                ❤️ Follow
                             </button>
                         </div>
                     ))
