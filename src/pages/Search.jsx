@@ -1,19 +1,19 @@
 import { useState } from 'react';
 import { Search as SearchIcon } from 'lucide-react';
+import { useNavigate } from 'react-router-dom'; // Qo'shildi
 import api from '../services/api';
-import UserPanel from '../components/UserProfilePanel'; // Yangi komponentni import qildik
 import './Search.css';
 
 const Search = () => {
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [selectedUser, setSelectedUser] = useState(null);
+    const navigate = useNavigate(); // Hookni chaqiramiz
 
     const handleSearch = async (e) => {
         const value = e.target.value;
         setQuery(value);
-        
+
         if (value.length > 2) {
             setLoading(true);
             try {
@@ -26,15 +26,6 @@ const Search = () => {
             }
         } else {
             setResults([]);
-        }
-    };
-
-    const handleFollow = async (friendId) => {
-        try {
-            await api.post('/users/request', { friendId });
-            alert("So'rov yuborildi! ❤️");
-        } catch (err) {
-            alert(err.response?.data?.error || "Xatolik yuz berdi");
         }
     };
 
@@ -54,10 +45,10 @@ const Search = () => {
 
             <div className="search-results">
                 {loading && <p className="status-text">Qidirilmoqda...</p>}
-                
+
                 {results.map((u) => (
-                    <div key={u.id} className="user-card" onClick={() => setSelectedUser(u)}>
-                        <img src={u.avatar_url || '/avatar.png'} alt="avatar" />
+                    <div key={u.id} className="user-card" onClick={() => navigate(`/user/${u.id}`)}>
+                        <img src={u.avatar_url || '/avatar.png'} alt="avatar" className="user-avatar" />
                         <div className="user-card-info">
                             <h4>{u.username}</h4>
                             <p>{u.bio || "Profile ko'rish uchun bosing"}</p>
@@ -65,13 +56,6 @@ const Search = () => {
                     </div>
                 ))}
             </div>
-
-            {/* Tozalangan Modal qismi */}
-            <UserPanel 
-                user={selectedUser} 
-                onClose={() => setSelectedUser(null)} 
-                onFollow={handleFollow} 
-            />
         </div>
     );
 };

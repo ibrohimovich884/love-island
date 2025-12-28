@@ -1,4 +1,4 @@
-/* :root {
+:root {
     --li-pink: #ff4d6d;
     --li-gradient: linear-gradient(135deg, #ff4d6d 0%, #ff8fa3 100%);
     --bg-light: #fdf2f4;
@@ -19,7 +19,7 @@
     z-index: 100;
     border-bottom: 1px solid rgba(0,0,0,0.05);
 }
-*/
+
 .search-input-wrapper {
     display: flex;
     align-items: center;
@@ -45,150 +45,66 @@
     font-size: 16px; 
     color: #333;
 }
-/*
+
 .search-results {
     padding: 10px 16px;
+}
+/* src/pages/Search.css */
+.search-results {
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Kartalar orasidagi masofa */
 }
 
 .user-card {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px;
-    margin-bottom: 12px;
-    background: #fff;
-    border-radius: 18px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    border: 1px solid #f8f9fa;
+    align-items: center; /* Rasm va so'zlarni vertikal o'rtaga tekislaydi */
+    padding: 10px 14px;
+    background: #ffffff;
+    border-radius: 16px; /* Burchaklarni biroz yumshatdik */
+    gap: 12px; /* Rasm va tekst orasidagi masofa */
+    border: 1px solid #f1f3f5;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: background 0.2s ease;
+}
+
+.user-card:active {
+    background: #f8f9fa; /* Bosganda yengil rang o'zgarishi */
+    transform: scale(0.98);
+}
+
+.user-avatar {
+    width: 48px;  /* Kichikroq, ixcham dumaloq rasm */
+    height: 48px;
+    border-radius: 50%; /* Rasmni dumaloq qiladi */
+    object-fit: cover;
+    background: #fff0f3; /* Rasm yuklanmaguncha orqa fon */
+    flex-shrink: 0; /* Rasm qisqarib ketmasligi uchun */
+    border: 1.5px solid var(--li-pink); /* Love Island stili uchun yengil chiziq */
 }
 
 .user-card-info {
     display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.user-card-info img {
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid var(--bg-light);
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden; /* Tekst chiqib ketmasligi uchun */
 }
 
 .user-card-info h4 {
     margin: 0;
     font-size: 15px;
     font-weight: 700;
-    color: #2d3436;
+    color: #1a1a1a;
+    line-height: 1.2;
 }
 
 .user-card-info p {
     margin: 2px 0 0;
     font-size: 12px;
-    color: #636e72;
-    max-width: 140px; 
+    color: #777;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.request-btn {
-    background: var(--li-gradient);
-    color: white;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 600;
-    box-shadow: 0 4px 10px rgba(255, 77, 109, 0.3);
-    transition: transform 0.1s active;
-    white-space: nowrap;
-}
-
-.request-btn:active {
-    transform: scale(0.92);
-    opacity: 0.9;
-}
-
-.status-text {
-    text-align: center;
-    color: #b2bec3;
-    margin-top: 40px;
-    font-size: 14px;
-    font-weight: 500;
-}
-
-@keyframes pulse {
-    0% { opacity: 0.6; }
-    50% { opacity: 1; }
-    100% { opacity: 0.6; }
-}
-
-.loading-text {
-    animation: pulse 1.5s infinite;
-    color: var(--li-pink);
-    text-align: center;
-    margin-top: 20px;
-} */
-
-/* User Panel Modal */
-.user-panel-overlay {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: flex-end; /* Pastdan chiqishi uchun */
-    z-index: 1000;
-}
-
-.user-panel-content {
-    width: 100%;
-    background: white;
-    border-radius: 30px 30px 0 0;
-    padding: 30px 20px;
-    animation: slideUp 0.3s ease-out;
-    position: relative;
-    text-align: center;
-}
-
-@keyframes slideUp {
-    from { transform: translateY(100%); }
-    to { transform: translateY(0); }
-}
-
-.panel-header img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: 4px solid #ff4d6d;
-    margin-bottom: 15px;
-}
-
-.panel-actions {
-    display: flex;
-    gap: 15px;
-    margin-top: 25px;
-}
-
-.follow-btn, .message-btn {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 12px;
-    border-radius: 12px;
-    border: none;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.follow-btn { background: #ff4d6d; color: white; }
-.message-btn { background: #f1f3f5; color: #333; }
-
-.close-panel {
-    position: absolute;
-    top: 15px; right: 15px;
-    background: none; border: none; color: #ddd;
+    text-overflow: ellipsis; /* Uzun tekstni uchta nuqta qiladi (...) */
+    max-width: 200px;
 }

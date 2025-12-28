@@ -9,6 +9,7 @@ import Header from './components/Header';
 import BottomNav from './components/BottomNav';
 import Profile from './pages/Profile';
 import Notifications from './pages/Notifications';
+import UserProfile from './pages/UserProfile';
 import './App.css';
 
 // Himoyalangan Layout (Header va Footer bilan)
@@ -46,6 +47,7 @@ function App() {
           <Route path="/search" element={<PrivateRoute><Search /></PrivateRoute>} />
           <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
           <Route path="/notifications" element={<PrivateRoute><Notifications /></PrivateRoute>} />
+          <Route path="/user/:id" element={<PrivateRoute><UserProfile /></PrivateRoute>} />
           
           {/* Noma'lum yo'llar */}
           <Route path="*" element={<Navigate to="/home" />} />
