@@ -28,11 +28,10 @@ const Search = () => {
 
     const sendRequest = async (receiverId) => {
         try {
-            await api.post('/users/friend-request', { receiverId });
-            alert("So'rov yuborildi! ✨");
-            // Tugmani holatini o'zgartirish uchun natijani yangilash mumkin
+            await api.post('/users/request', { friendId: receiverId });
+            alert("So'rov yuborildi! ❤️");
         } catch (err) {
-            alert("So'rov yuborishda xatolik!");
+            alert(err.response?.data?.error || "Xatolik yuz berdi");
         }
     };
 
@@ -41,9 +40,9 @@ const Search = () => {
             <div className="search-bar-container">
                 <div className="search-input-wrapper">
                     <SearchIcon size={20} className="search-icon" />
-                    <input 
-                        type="text" 
-                        placeholder="Foydalanuvchi nomini yozing..." 
+                    <input
+                        type="text"
+                        placeholder="Foydalanuvchi nomini yozing..."
                         value={query}
                         onChange={handleSearch}
                         autoFocus
@@ -54,7 +53,7 @@ const Search = () => {
 
             <div className="search-results">
                 {loading && <p className="status-text">Qidirilmoqda...</p>}
-                
+
                 {results.length > 0 ? (
                     results.map((u) => (
                         <div key={u.id} className="user-card">
@@ -65,8 +64,8 @@ const Search = () => {
                                     <p>{u.bio || "Salom, men o'yindaman!"}</p>
                                 </div>
                             </div>
-                            <button onClick={() => sendRequest(u.id)} className="add-btn">
-                                <UserPlus size={20} />
+                            <button onClick={() => sendRequest(foundUser.id)} className="send-req-btn">
+                                Yurakcha yuborish
                             </button>
                         </div>
                     ))
