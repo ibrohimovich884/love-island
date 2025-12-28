@@ -1,0 +1,73 @@
+        /* src/pages/Notifications.css */
+.notif-container {
+    padding: 10px;
+    animation: fadeIn 0.4s ease;
+}
+
+.notif-title {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #1a1a1a;
+}
+
+.notif-card {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 15px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    gap: 12px;
+}
+
+.notif-card img {
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.notif-info {
+    flex: 1;
+}
+
+.notif-info strong {
+    font-size: 15px;
+    color: #333;
+}
+
+.notif-info p {
+    font-size: 12px;
+    color: #888;
+    margin: 2px 0 0;
+}
+
+.notif-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.accept-btn, .reject-btn {
+    border: none;
+    padding: 8px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.accept-btn { background: #e7f5ff; color: #228be6; }
+.reject-btn { background: #fff0f3; color: #ff4d6d; }
+
+.accept-btn:active { background: #228be6; color: white; }
+.reject-btn:active { background: #ff4d6d; color: white; }
+
+.empty-notif {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.empty-notif p {
+    color: #adb5bd;
+    margin-top: 10px;
+}

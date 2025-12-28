@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Search from './pages/Search';
 import Header from './components/Header';
 import BottomNav from './components/BottomNav';
+import Profile from './pages/Profile';
 import './App.css';
 
 // Himoyalangan Layout (Header va Footer bilan)
@@ -42,6 +43,7 @@ function App() {
           {/* Himoyalangan sahifalar (Header va BottomNav bilan) */}
           <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
           <Route path="/search" element={<PrivateRoute><Search /></PrivateRoute>} />
+          <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
           
           {/* Noma'lum yo'llar */}
           <Route path="*" element={<Navigate to="/home" />} />
