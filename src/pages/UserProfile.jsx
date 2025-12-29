@@ -29,7 +29,7 @@ const UserProfile = () => {
         try {
             await api.post('/users/request', { friendId: user.id });
             setIsRequested(true); // So'rov yuborilgach, holatni o'zgartiramiz
-            alert(`Siz ${user.username} bilan juftlik (match) so'rovini yubordingiz! ❤️`);
+            alert(`Siz ${user.username} bilan juftlik so'rovini yubordingiz! ❤️`);
         } catch (err) {
             alert(err.response?.data?.error || "Xatolik yuz berdi");
         }

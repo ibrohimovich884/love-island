@@ -1,0 +1,40 @@
+.matches-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 ta ustunli grid */
+    gap: 15px;
+    padding: 20px;
+}
+
+.match-card {
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.match-card:active {
+    transform: scale(0.95);
+}
+
+.match-avatar-box img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ff4d6d; /* Love Island pushtisi */
+}
+
+.chat-start-btn {
+    background: #ff4d6d;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 10px auto 0;
+}
