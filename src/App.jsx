@@ -11,6 +11,7 @@ import Profile from './pages/Profile';
 import Notifications from './pages/Notifications';
 import UserProfile from './pages/UserProfile';
 import Matches from './pages/Matches';
+import Games from './pages/Games';
 import './App.css';
 
 // Himoyalangan Layout (Header va Footer bilan)
@@ -50,6 +51,7 @@ function App() {
           <Route path="/notifications" element={<PrivateRoute><Notifications /></PrivateRoute>} />
           <Route path="/user/:id" element={<PrivateRoute><UserProfile /></PrivateRoute>} />
           <Route path="/matches" element={<PrivateRoute><Matches /></PrivateRoute>} />  
+          <Route path="/games" element={<PrivateRoute><Games /></PrivateRoute>} />
           
           {/* Noma'lum yo'llar */}
           <Route path="*" element={<Navigate to="/home" />} />
