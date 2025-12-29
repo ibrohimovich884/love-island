@@ -1,6 +1,6 @@
-import { useState, useContext } from 'react';
-import { AuthContext } from '../store/AuthContext'; // Context'ni import qildik
-import { useNavigate, Link } from 'react-router-dom';
+import { useState, useContext, useEffect } from 'react'; // useEffect qo'shildi
+import { AuthContext } from '../store/AuthContext';
+import { useNavigate, Link, useLocation } from 'react-router-dom'; // useLocation qo'shildi
 import { Heart, Mail, Lock } from 'lucide-react';
 import './Login.css';
 
@@ -8,20 +8,32 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [successMsg, setSuccessMsg] = useState(''); // Bildirishnoma uchun
 
-    // GLOBAL LOGIN FUNKSIYANI OLAMIZ
     const { login } = useContext(AuthContext); 
     const navigate = useNavigate();
+    const location = useLocation(); // Registerdan kelgan state'ni olish uchun
+
+    useEffect(() => {
+        // Agar Register sahifasidan ma'lumot kelgan bo'lsa
+        if (location.state) {
+            if (location.state.email) setEmail(location.state.email);
+            if (location.state.password) setPassword(location.state.password);
+            if (location.state.message) setSuccessMsg(location.state.message);
+            
+            // State'ni tozalab qo'yish (sahifa yangilanganda xabarlar qolib ketmasligi uchun)
+            window.history.replaceState({}, document.title);
+        }
+    }, [location]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
+        setSuccessMsg(''); // Xabarni tozalash
         try {
-            // Context'dagi login funksiyasini chaqiramiz
             await login(email, password);
             navigate('/home');
         } catch (err) {
-            // Agar backend 400 yoki 404 qaytarsa, shu yerda tutamiz
             setError(err.response?.data?.error || "Kirishda xatolik yuz berdi");
         }
     };
@@ -36,6 +48,9 @@ const Login = () => {
                 </div>
 
                 <form onSubmit={handleSubmit} className="auth-form">
+                    {/* Muvaffaqiyat xabari (Pushti rangda chiroyli chiqadi) */}
+                    {successMsg && <div className="success-msg" style={{color: '#2ecc71', backgroundColor: '#eafaf1', padding: '10px', borderRadius: '8px', marginBottom: '10px', fontSize: '14px', textAlign: 'center'}}>{successMsg}</div>}
+                    
                     {error && <div className="error-msg">{error}</div>}
 
                     <div className="input-group">

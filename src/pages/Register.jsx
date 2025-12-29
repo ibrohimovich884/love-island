@@ -13,13 +13,20 @@ const Register = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
+    // Register.js ichidagi handleSubmit funksiyasi
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
         try {
             await api.post('/auth/register', formData);
-            alert("Ro'yxatdan o'tdingiz! Endi tizimga kiring.");
-            navigate('/login');
+
+            navigate('/login', {
+                state: {
+                    email: formData.email,
+                    password: formData.password,
+                    message: "Ro'yxatdan o'tdingiz! Kirish tugmasini bosing."
+                }
+            });
         } catch (err) {
             setError(err.response?.data?.error || "Xatolik yuz berdi");
         }
@@ -50,7 +57,7 @@ const Register = () => {
                             type="text"
                             placeholder="Foydalanuvchi nomi"
                             value={formData.username}
-                            onChange={(e) => setFormData({...formData, username: e.target.value})}
+                            onChange={(e) => setFormData({ ...formData, username: e.target.value })}
                             required
                         />
                     </div>
@@ -61,7 +68,7 @@ const Register = () => {
                             type="email"
                             placeholder="Email manzilingiz"
                             value={formData.email}
-                            onChange={(e) => setFormData({...formData, email: e.target.value})}
+                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                             required
                         />
                     </div>
@@ -72,7 +79,7 @@ const Register = () => {
                             type="password"
                             placeholder="Parol yarating"
                             value={formData.password}
-                            onChange={(e) => setFormData({...formData, password: e.target.value})}
+                            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                             required
                         />
                     </div>
