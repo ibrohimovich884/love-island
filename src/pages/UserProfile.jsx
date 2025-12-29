@@ -1,44 +1,64 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, MoreHorizontal, Grid, Tv, UserSquare2 } from 'lucide-react';
+import { useNotification } from '../context/NotificationContext'; 
 import api from '../services/api';
 import './UserProfile.css';
 
 const UserProfile = () => {
     const { id } = useParams();
     const navigate = useNavigate();
+    const { showToast } = useNotification();
+
     const [user, setUser] = useState(null);
-    
-    // 1. MANA SHU O'ZGARUVCHINI QO'SHISH KERAK EDI:
-    const [isRequested, setIsRequested] = useState(false);
+    const [status, setStatus] = useState("none");
 
     useEffect(() => {
         const fetchUser = async () => {
             try {
                 const res = await api.get(`/users/profile/${id}`);
                 setUser(res.data);
+                setStatus(res.data.friendshipStatus || "none");
             } catch (err) {
-                console.error("Userni yuklashda xato:", err);
+                console.error("User yuklashda xato:", err);
+                showToast("Foydalanuvchi ma'lumotlarini yuklab bo'lmadi", "simple");
             }
         };
         fetchUser();
     }, [id]);
 
-    // 2. FOLLOW (MATCH) FUNKSIYASI
-    const handleFollow = async () => {
+    const handleAction = async () => {
         try {
-            await api.post('/users/request', { friendId: user.id });
-            setIsRequested(true); // So'rov yuborilgach, holatni o'zgartiramiz
-            alert(`Siz ${user.username} bilan juftlik so'rovini yubordingiz! ❤️`);
+            if (status === "none") {
+                await api.post('/users/request', { friendId: user.id });
+                setStatus("sent");
+                showToast("So'rov yuborildi 💌", "simple");
+            } else if (status === "sent" || status === "accepted") {
+                await api.delete(`/users/unlove/${user.id}`);
+                setStatus("none");
+                showToast("Aloqa uzildi", "simple");
+            }
         } catch (err) {
-            alert(err.response?.data?.error || "Xatolik yuz berdi");
+            showToast("Amalni bajarib bo'lmadi", "simple");
         }
     };
 
     if (!user) return <div className="loader">Yuklanmoqda...</div>;
 
+    const getButtonConfig = () => {
+        switch (status) {
+            case "sent": return { text: "Requested 💌", className: "btn-pending" };
+            case "accepted": return { text: "Unlove 💔", className: "btn-accepted" };
+            case "received": return { text: "Accept Love ✅", className: "btn-received" };
+            default: return { text: "Love ❤️", className: "btn-follow" };
+        }
+    };
+
+    const btnConfig = getButtonConfig();
+
     return (
         <div className="full-profile-page">
+            {/* --- MANA SHU QISMLAR QAYTA TIKLANDI --- */}
             <div className="profile-top-nav">
                 <ArrowLeft onClick={() => navigate(-1)} className="cursor-pointer" />
                 <h3 className="nav-username">{user.username}</h3>
@@ -48,7 +68,11 @@ const UserProfile = () => {
             <div className="profile-content">
                 <div className="profile-header-main">
                     <div className="profile-avatar-container">
-                        <img src={user.avatar_url || '/avatar.png'} alt="avatar" className="main-avatar" />
+                        <img 
+                            src={user.avatar_url || '/avatar.png'} 
+                            alt="avatar" 
+                            className="main-avatar" 
+                        />
                     </div>
                     
                     <div className="profile-stats">
@@ -59,17 +83,16 @@ const UserProfile = () => {
 
                 <div className="profile-bio-section">
                     <h4 className="bio-name">{user.username}</h4>
-                    <p className="bio-text">{user.bio || "Love Island foydalanuvchisi"}</p>
+                    <p className="bio-text">{user.bio || ""}</p>
                 </div>
+                {/* -------------------------------------- */}
 
                 <div className="profile-actions">
-                    {/* 3. TUGMA MANTIG'INI YANGILADIK */}
-                    <button 
-                        className={isRequested ? "btn-requested" : "btn-follow"} 
-                        onClick={handleFollow}
-                        disabled={isRequested}
+                    <button
+                        className={btnConfig.className}
+                        onClick={status === "received" ? () => navigate('/notifications') : handleAction}
                     >
-                        {isRequested ? "Requested 💌" : "Love ❤️"}
+                        {btnConfig.text}
                     </button>
 
                     <button className="btn-message" onClick={() => navigate(`/chat/${user.id}`)}>
