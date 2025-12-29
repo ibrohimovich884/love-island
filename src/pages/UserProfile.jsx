@@ -5,14 +5,17 @@ import api from '../services/api';
 import './UserProfile.css';
 
 const UserProfile = () => {
-    const { id } = useParams(); // URL dan user ID sini olamiz
+    const { id } = useParams();
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
+    
+    // 1. MANA SHU O'ZGARUVCHINI QO'SHISH KERAK EDI:
+    const [isRequested, setIsRequested] = useState(false);
 
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const res = await api.get(`/users/profile/${id}`); // Backenddan userni olish
+                const res = await api.get(`/users/profile/${id}`);
                 setUser(res.data);
             } catch (err) {
                 console.error("Userni yuklashda xato:", err);
@@ -21,11 +24,21 @@ const UserProfile = () => {
         fetchUser();
     }, [id]);
 
+    // 2. FOLLOW (MATCH) FUNKSIYASI
+    const handleFollow = async () => {
+        try {
+            await api.post('/users/request', { friendId: user.id });
+            setIsRequested(true); // So'rov yuborilgach, holatni o'zgartiramiz
+            alert(`Siz ${user.username} bilan juftlik (match) so'rovini yubordingiz! ❤️`);
+        } catch (err) {
+            alert(err.response?.data?.error || "Xatolik yuz berdi");
+        }
+    };
+
     if (!user) return <div className="loader">Yuklanmoqda...</div>;
 
     return (
         <div className="full-profile-page">
-            {/* Header: Orqaga qaytish va User nomi */}
             <div className="profile-top-nav">
                 <ArrowLeft onClick={() => navigate(-1)} className="cursor-pointer" />
                 <h3 className="nav-username">{user.username}</h3>
@@ -33,7 +46,6 @@ const UserProfile = () => {
             </div>
 
             <div className="profile-content">
-                {/* Asosiy ma'lumotlar qismi */}
                 <div className="profile-header-main">
                     <div className="profile-avatar-container">
                         <img src={user.avatar_url || '/avatar.png'} alt="avatar" className="main-avatar" />
@@ -45,28 +57,32 @@ const UserProfile = () => {
                     </div>
                 </div>
 
-                {/* Bio qismi */}
                 <div className="profile-bio-section">
                     <h4 className="bio-name">{user.username}</h4>
                     <p className="bio-text">{user.bio || "Love Island foydalanuvchisi"}</p>
                 </div>
 
-                {/* Action tugmalari */}
                 <div className="profile-actions">
-                    <button className="btn-follow">Following</button>
+                    {/* 3. TUGMA MANTIG'INI YANGILADIK */}
+                    <button 
+                        className={isRequested ? "btn-requested" : "btn-follow"} 
+                        onClick={handleFollow}
+                        disabled={isRequested}
+                    >
+                        {isRequested ? "Requested 💌" : "Love ❤️"}
+                    </button>
+
                     <button className="btn-message" onClick={() => navigate(`/chat/${user.id}`)}>
                         Message
                     </button>
                 </div>
 
-                {/* Tablar (Instagram uslubida) */}
                 <div className="profile-tabs">
                     <div className="tab active"><Grid size={20} /></div>
                     <div className="tab"><Tv size={20} /></div>
                     <div className="tab"><UserSquare2 size={20} /></div>
                 </div>
 
-                {/* Bo'sh holat */}
                 <div className="no-posts">
                     <div className="no-posts-icon">📸</div>
                     <h2>No Posts Yet</h2>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Check, X, BellOff, ArrowLeft } from 'lucide-react';
+import { Check, X, BellOff, ArrowLeft, MessageSquare } from 'lucide-react'; // MessageSquare qo'shildi
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import './Notifications.css';
@@ -15,6 +15,7 @@ const Notifications = () => {
     const fetchRequests = async () => {
         try {
             const res = await api.get('/users/pending');
+            // Backenddan: [{ id, username, avatar_url, sender_id }, ...] keladi
             setRequests(res.data);
         } catch (err) {
             console.error("Xatolik:", err);
@@ -23,9 +24,15 @@ const Notifications = () => {
 
     const handleAction = async (requestId, status) => {
         try {
-            // Backendda buni 'respond-request' deb nomlagan bo'lishingiz mumkin
+            // requestId - bu friends jadvalidagi qatorning ID-si
             await api.post('/users/respond', { requestId, status }); 
+            
+            // Ro'yxatdan o'chirib tashlash
             setRequests(requests.filter(req => req.id !== requestId));
+            
+            if (status === 'accepted') {
+                alert("Yangi juftlik hosil bo'ldi! ❤️");
+            }
         } catch (err) {
             alert("Xatolik yuz berdi");
         }
@@ -34,7 +41,7 @@ const Notifications = () => {
     return (
         <div className="notif-page">
             <div className="notif-header">
-                <button onClick={() => navigate(-1)}><ArrowLeft /></button>
+                <button onClick={() => navigate(-1)} className="back-btn"><ArrowLeft /></button>
                 <h2>Bildirishnomalar</h2>
                 <div style={{width: 24}}></div>
             </div>
@@ -48,11 +55,16 @@ const Notifications = () => {
                 ) : (
                     requests.map(req => (
                         <div key={req.id} className="notif-item">
-                            <img src={req.avatar_url || '/avatar.png'} alt="user" />
+                            <div className="notif-avatar-wrapper">
+                                <img src={req.avatar_url || '/avatar.png'} alt="user" />
+                                <div className="notif-icon-badge"><MessageSquare size={12} fill="white" /></div>
+                            </div>
+                            
                             <div className="notif-info">
                                 <strong>{req.username}</strong>
-                                <span>Sizga juftlik so'rovini yubordi</span>
+                                <span>"I've got a text!" — Siz bilan bog'lanmoqchi 💌</span>
                             </div>
+
                             <div className="notif-btns">
                                 <button className="btn-accept" onClick={() => handleAction(req.id, 'accepted')}>
                                     <Check size={20} />
