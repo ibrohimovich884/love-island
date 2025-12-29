@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Check, X, BellOff, ArrowLeft, MessageSquare } from 'lucide-react'; // MessageSquare qo'shildi
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
+import { useNotification } from '../context/NotificationContext';
 import './Notifications.css';
 
 const Notifications = () => {
@@ -31,10 +32,10 @@ const Notifications = () => {
             setRequests(requests.filter(req => req.id !== requestId));
             
             if (status === 'accepted') {
-                alert("Yangi juftlik hosil bo'ldi! ❤️");
+                showToast("Yangi juftlik hosil bo'ldi! ❤️");
             }
         } catch (err) {
-            alert("Xatolik yuz berdi");
+            showToast("Xatolik yuz berdi");
         }
     };
 

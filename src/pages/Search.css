@@ -1,3 +1,4 @@
+/* src/pages/Search.css */
 :root {
     --li-pink: #ff4d6d;
     --li-gradient: linear-gradient(135deg, #ff4d6d 0%, #ff8fa3 100%);
@@ -7,34 +8,48 @@
 .search-page {
     background: #ffffff;
     min-height: 100vh;
-    padding-bottom: 80px; 
 }
 
+/* 1. HEADER QISMI - Tugma va Input yonma-yon */
 .search-bar-container {
-    padding: 12px 16px;
+    display: flex; /* Back tugmasi va inputni yonma-yon qiladi */
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
     position: sticky;
     top: 0;
     background: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(10px);
     z-index: 100;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+    border-bottom: 1px solid #f1f3f5;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1a1a1a;
+    cursor: pointer;
+    flex-shrink: 0; /* Tugma siqilib qolmasligi uchun */
 }
 
 .search-input-wrapper {
+    flex: 1; /* Input qolgan hamma bo'sh joyni egallaydi */
     display: flex;
     align-items: center;
     background: #f1f3f5;
     padding: 10px 15px;
-    border-radius: 25px; 
+    border-radius: 20px;
     gap: 10px;
-    transition: all 0.2s ease;
-    border: 1px solid transparent;
+    transition: 0.2s;
 }
 
 .search-input-wrapper:focus-within {
     background: #fff;
-    border-color: var(--li-pink);
-    box-shadow: 0 4px 12px rgba(255, 77, 109, 0.15);
+    box-shadow: 0 0 0 1.5px var(--li-pink); /* Fokus bo'lganda chiziq */
 }
 
 .search-input-wrapper input {
@@ -42,53 +57,49 @@
     background: transparent;
     outline: none;
     width: 100%;
-    font-size: 16px; 
+    font-size: 16px;
     color: #333;
 }
 
+.search-icon {
+    color: #8e8e93;
+}
+
+/* 2. NATIJALAR QISMI */
 .search-results {
     padding: 10px 16px;
-}
-/* src/pages/Search.css */
-.search-results {
-    padding: 10px 15px;
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Kartalar orasidagi masofa */
 }
 
 .user-card {
     display: flex;
-    align-items: center; /* Rasm va so'zlarni vertikal o'rtaga tekislaydi */
-    padding: 10px 14px;
-    background: #ffffff;
-    border-radius: 16px; /* Burchaklarni biroz yumshatdik */
-    gap: 12px; /* Rasm va tekst orasidagi masofa */
-    border: 1px solid #f1f3f5;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-    transition: background 0.2s ease;
+    align-items: center;
+    padding: 12px 0; /* Paddingni kamaytirib, border bilan ajratdik */
+    gap: 12px;
+    border-bottom: 0.5px solid #f1f3f5;
+    background: #fff;
+    transition: opacity 0.1s;
 }
 
 .user-card:active {
-    background: #f8f9fa; /* Bosganda yengil rang o'zgarishi */
-    transform: scale(0.98);
+    opacity: 0.6;
 }
 
 .user-avatar {
-    width: 48px;  /* Kichikroq, ixcham dumaloq rasm */
-    height: 48px;
-    border-radius: 50%; /* Rasmni dumaloq qiladi */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     object-fit: cover;
-    background: #fff0f3; /* Rasm yuklanmaguncha orqa fon */
-    flex-shrink: 0; /* Rasm qisqarib ketmasligi uchun */
-    border: 1.5px solid var(--li-pink); /* Love Island stili uchun yengil chiziq */
+    flex-shrink: 0;
+    border: 1px solid var(--bg-light);
 }
 
 .user-card-info {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    overflow: hidden; /* Tekst chiqib ketmasligi uchun */
+    overflow: hidden;
 }
 
 .user-card-info h4 {
@@ -96,15 +107,20 @@
     font-size: 15px;
     font-weight: 700;
     color: #1a1a1a;
-    line-height: 1.2;
 }
 
 .user-card-info p {
     margin: 2px 0 0;
-    font-size: 12px;
-    color: #777;
+    font-size: 13px;
+    color: #8e8e93;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; /* Uzun tekstni uchta nuqta qiladi (...) */
-    max-width: 200px;
+    text-overflow: ellipsis;
+}
+
+.status-text {
+    text-align: center;
+    color: #adb5bd;
+    margin-top: 40px;
+    font-size: 14px;
 }
