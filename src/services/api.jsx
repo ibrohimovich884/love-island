@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://love-island-server.onrender.com/api', // Backend portingiz http://localhost:5000/api
+    baseURL: 'https://love-island-server.onrender.com/api', 
+    // baseURL: 'http://localhost:5000/api',
 });
 
 // Har safar so'rov ketganda tokenni tekshirib, Headerga qo'shadi

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Trophy, Target, Hash } from 'lucide-react';
@@ -12,10 +13,11 @@ const Games = () => {
             name: 'Shashka',
             icon: <Target size={40} />,
             color: '#ff4d6d',
-            path: 'http://localhost:5174', // O'yinning alohida manzili
+            // DEPLOY qilingan manzilingizni shu yerga yozing
+            path: 'https://checkers-one-two.vercel.app', 
             active: true
         },
-        {
+         {
             id: 'chess',
             name: 'Shaxmat',
             icon: <Trophy size={40} />,
@@ -31,6 +33,7 @@ const Games = () => {
             path: '#',
             active: false // Hali tayyor emas
         }
+        // ... boshqa o'yinlar
     ];
 
     const handlePlay = (game) => {
@@ -39,18 +42,24 @@ const Games = () => {
             return;
         }
 
-        const token = localStorage.getItem('token');
-        // O'yinga tokenni URL orqali uzatish
+        // 1. LocalStorage'dan tokenni qidiramiz
+        const token = localStorage.getItem('token'); 
+
+        if (!token) {
+            // Agar foydalanuvchi login qilmagan bo'lsa
+            alert("O'yinni boshlash uchun iltimos tizimga kiring!");
+            navigate('/login');
+            return;
+        }
+
+        // 2. Tokenni URL parametr sifatida qo'shib, o'yinga yuboramiz
+        // "auth_token" kalit so'zi bilan yuboramiz
         window.location.href = `${game.path}?auth_token=${token}`;
     };
 
     return (
         <div className="games-container">
-            <div className="games-header">
-                <h1>Couple Games 🎮</h1>
-                <p>Juftingiz bilan bellashing va munosabatlarni mustahkamlang!</p>
-            </div>
-
+            {/* ... JSX qismi o'zgarmaydi ... */}
             <div className="games-grid">
                 {gamesList.map((game) => (
                     <div 
@@ -59,9 +68,7 @@ const Games = () => {
                         onClick={() => handlePlay(game)}
                         style={{ '--game-color': game.color }}
                     >
-                        <div className="game-icon-wrapper">
-                            {game.icon}
-                        </div>
+                        <div className="game-icon-wrapper">{game.icon}</div>
                         <h3>{game.name}</h3>
                         {!game.active && <span className="status-badge">Soon</span>}
                     </div>
